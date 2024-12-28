@@ -1,0 +1,21 @@
+name = "react-router-cloudflare-d1"
+compatibility_date = "2024-11-18"
+compatibility_flags = ["nodejs_compat"]
+main = "./build/server/index.js"
+assets = { directory = "./build/client/" }
+
+[vars]
+VALUE_FROM_CLOUDFLARE="Edit this value from wranlger.toml"
+# Values defined in .dev.vars will overwrite values here
+CLOUDFLARE_ACCOUNT_ID=""
+CLOUDFLARE_DATABASE_ID=""
+
+[[d1_databases]]
+binding = "DB"
+database_name = "your-database-name"
+database_id = "your-database-id"
+migrations_dir = "drizzle"
+
+
+[env.preview]
+workers_dev = true
