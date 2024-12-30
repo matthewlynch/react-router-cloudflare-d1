@@ -100,14 +100,16 @@ export function Welcome({
                 </p>
               )}
             </Form>
-            <ul className="text-center">
-              {<li className="p-3">{message}</li>}
-              {guestBook.map(({ id, name }) => (
-                <li key={id} className="p-3">
-                  {name}
-                </li>
-              ))}
-            </ul>
+            <div className="text-center">
+              <p className="p-3">Signed by:</p>
+              <ul className="text-center">
+                {guestBook.map(({ id, name }) => (
+                  <li key={id} className="p-3">
+                    {name}
+                  </li>
+                ))}
+              </ul>
+            </div>
           </section>
         </div>
       </div>
