@@ -12,13 +12,15 @@
     "build": "react-router build",
     "db:generate": "dotenv -- drizzle-kit generate",
     "db:migrate": "wrangler d1 migrations apply --local DB",
-    "db:migrate:production": "dotenv -- drizzle-kit migrate",
-    "db:studio": "LOCAL_DB_PATH=$(find .wrangler/state/v3/d1/miniflare-D1DatabaseObject -type f -name '*.sqlite' -print -quit) dotenvx run -f .dev.vars -- drizzle-kit studio",
+    "db:migrate:production": "dotenvx run -f .dev.vars -- drizzle-kit migrate",
+    "db:studio": "LOCAL_DB_PATH=$(find .wrangler/state/v3/d1/miniflare-D1DatabaseObject -type f -name '*.sqlite' -print -quit) drizzle-kit studio",
     "db:studio:production": "dotenvx run -f .dev.vars -- drizzle-kit studio",
     "dev": "react-router dev",
     "start": "wrangler dev",
     "typegen": "wrangler types",
-    "typecheck": "react-router typegen && tsc"
+    "typecheck": "react-router typegen && tsc",
+    "preview": "wrangler versions upload --env preview",
+    "deploy:production": "wrangler deploy"
   },
   "dependencies": {
     "@react-router/node": "^7.1.1",
