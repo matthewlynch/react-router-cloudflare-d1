@@ -20,6 +20,7 @@ Some of the code in this repo was adapted from the [React Router Cloudflare D1 t
 - 🎉 TailwindCSS for styling
 - 🟧️ Setup to deploy to Cloudflare Workers
 - 📊 Cloudflare D1 database for production and SQLite database for local development
+- 📜 Pre-render routes at build time
 - 🌍 Separate environments for preview and production
 - 📟 [`cloudflareDevProxy`](https://github.com/remix-run/remix/blob/main/packages/remix-dev/vite/cloudflare-proxy-plugin.ts) to make Cloudflare bindings work locally
 - 📖 [React Router docs](https://reactrouter.com/)

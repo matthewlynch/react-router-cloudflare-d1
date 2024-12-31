@@ -1,7 +1,10 @@
-import { Form, useNavigation } from "react-router";
+import { Form, Link, useNavigation } from "react-router";
 
 import logoDark from "./logo-dark.svg";
 import logoLight from "./logo-light.svg";
+
+const linkClassName =
+  "group flex items-center gap-3 self-stretch p-3 leading-normal text-blue-700 hover:underline dark:text-blue-500";
 
 export function Welcome({
   guestBook,
@@ -40,17 +43,24 @@ export function Welcome({
               What&apos;s next?
             </p>
             <ul>
-              {resources.map(({ href, text, icon }) => (
+              {resources.map(({ href, external, text, icon }) => (
                 <li key={href}>
-                  <a
-                    className="group flex items-center gap-3 self-stretch p-3 leading-normal text-blue-700 hover:underline dark:text-blue-500"
-                    href={href}
-                    target="_blank"
-                    rel="noreferrer"
-                  >
-                    {icon}
-                    {text}
-                  </a>
+                  {external ? (
+                    <a
+                      className={linkClassName}
+                      href={href}
+                      target="_blank"
+                      rel="noreferrer"
+                    >
+                      {icon}
+                      {text}
+                    </a>
+                  ) : (
+                    <Link className={linkClassName} to={href}>
+                      {icon}
+                      {text}
+                    </Link>
+                  )}
                 </li>
               ))}
               <li className="self-stretch p-3 leading-normal text-center">
@@ -120,6 +130,7 @@ export function Welcome({
 const resources = [
   {
     href: "https://reactrouter.com/docs",
+    external: true,
     text: "React Router Docs",
     icon: (
       <svg
@@ -141,11 +152,13 @@ const resources = [
   },
   {
     href: "https://rmx.as/discord",
+    external: true,
     text: "Join React Router Discord",
     icon: <DiscordIcon />,
   },
   {
     href: "https://developers.cloudflare.com/workers/",
+    external: true,
     text: "Cloudflare Workers Docs",
     icon: (
       <svg
@@ -172,8 +185,33 @@ const resources = [
   },
   {
     href: "https://discord.com/invite/cloudflaredev",
+    external: true,
     text: "Join Cloudflare Discord",
     icon: <DiscordIcon />,
+  },
+  {
+    href: "/pre-rendered",
+    external: false,
+    text: "View a pre-rendered route at build time",
+    icon: (
+      <svg
+        xmlns="http://www.w3.org/2000/svg"
+        width="32"
+        height="32"
+        viewBox="0 0 24 24"
+        fill="none"
+        stroke="currentColor"
+        strokeWidth="2"
+        strokeLinecap="round"
+        strokeLinejoin="round"
+        aria-hidden="true"
+      >
+        <path d="M10 12.5 8 15l2 2.5"></path>
+        <path d="m14 12.5 2 2.5-2 2.5"></path>
+        <path d="M14 2v4a2 2 0 0 0 2 2h4"></path>
+        <path d="M15 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V7z"></path>
+      </svg>
+    ),
   },
 ];
 

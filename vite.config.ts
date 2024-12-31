@@ -11,7 +11,12 @@ export default defineConfig(({ isSsrBuild }) => ({
   build: {
     rollupOptions: isSsrBuild
       ? {
-          input: "./workers/app.ts",
+          input: {
+            // `index.js` is the entrypoint for pre-rendering at build time
+            "index.js": "virtual:react-router/server-build",
+            // `worker.js` is the entrypoint for deployments on Cloudflare
+            "worker.js": "./workers/app.ts",
+          },
         }
       : undefined,
   },
@@ -41,6 +46,22 @@ export default defineConfig(({ isSsrBuild }) => ({
   plugins: [
     cloudflareDevProxy({ getLoadContext }),
     reactRouter(),
+    {
+      // This plugin is required so both `index.js` / `worker.js can be
+      // generated for the `build` config above
+      name: "react-router-cloudflare-workers",
+      config: () => ({
+        build: {
+          rollupOptions: isSsrBuild
+            ? {
+                output: {
+                  entryFileNames: "[name]",
+                },
+              }
+            : undefined,
+        },
+      }),
+    },
     tsconfigPaths(),
   ],
 }));
