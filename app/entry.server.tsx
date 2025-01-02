@@ -33,6 +33,8 @@ export default async function handleRequest(
   // https://react.dev/reference/react-dom/server/renderToPipeableStream#waiting-for-all-content-to-load-for-crawlers-and-static-generation
   if ((userAgent && isbot(userAgent)) || routerContext.isSpaMode) {
     await body.allReady;
+  } else {
+    responseHeaders.set("Transfer-Encoding", "chunked");
   }
 
   responseHeaders.set("Content-Type", "text/html");

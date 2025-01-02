@@ -9,6 +9,7 @@ import { getLoadContext } from "./load-context";
 
 export default defineConfig(({ isSsrBuild }) => ({
   build: {
+    cssMinify: process.env.NODE_ENV === "production",
     rollupOptions: isSsrBuild
       ? {
           input: {

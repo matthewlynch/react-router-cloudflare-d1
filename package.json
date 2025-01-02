@@ -9,7 +9,7 @@
     "url": "github:matthewlynch/react-router-cloudflare-d1"
   },
   "scripts": {
-    "build": "react-router build",
+    "build": "NODE_ENV=production react-router build",
     "db:generate": "dotenv -- drizzle-kit generate",
     "db:migrate": "wrangler d1 migrations apply --local DB",
     "db:migrate:production": "dotenvx run -f .dev.vars -- drizzle-kit migrate",
